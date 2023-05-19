@@ -56,8 +56,11 @@ bool Map::CheckRoomCreationEnd(vector<Room>& MapData, Room& InRoom, string InStr
 	// Is the leftover after removing a substring a substantial string?
 	if (InString != "\n" && InString != "")
 	{
-		Index = 0;
+		// Add the room to the map vector
 		MapData.push_back(InRoom);
+
+		// Create a new room with the substring's new room name
+		Index = 0;
 		InRoom = Room();
 		InRoom = CreateRoom(InRoom, InString, Index);
 		Index++;
@@ -67,6 +70,7 @@ bool Map::CheckRoomCreationEnd(vector<Room>& MapData, Room& InRoom, string InStr
 	// Have we reached the end of a Room?
 	if (Index > 2)
 	{
+		// Add the room to the map vector and initialise a new room
 		MapData.push_back(InRoom);
 		Index = 0;
 		InRoom = Room();
@@ -112,9 +116,11 @@ void Map::ParseMap(vector<Room> Map)
 // This function returns the name and description of the room, ready to be output to the player
 string Map::EnterRoom(int RoomIndex)
 {
+	// Get the row and column of the required room from the size of the arrays
 	int Column = RoomIndex % (sizeof(GameMap[0]) / sizeof(GameMap[0][0]));
 	int Row = (RoomIndex - Column) / (sizeof(GameMap) / sizeof(GameMap[0]));
 
+	// Read the appropriate room from the map
 	Room EnteredRoom = GameMap[Row][Column];
 	return EnteredRoom.ReadRoom();
 }
