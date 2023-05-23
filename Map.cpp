@@ -1,5 +1,6 @@
 #include "Map.h"
 
+// The constructor for the Map class
 Map::Map(Game* InGame)
 {
 	TextAdv = InGame;
@@ -101,8 +102,11 @@ Room Map::CreateRoom(Room& InRoom, string InString, int Index)
 // This function reads the map vector and converts it into a 2D array to be traversed by the player
 void Map::ParseMap(vector<Room> Map)
 {
+	// First we get the amount of rows and columns there are in our map
 	int Rows = sizeof(GameMap) / sizeof(GameMap[0]);
 	int Columns = sizeof(GameMap[0]) / sizeof(GameMap[0][0]);
+
+	// Then we create the room for the appropriate grid space by looping through the columns and rows
 	for (int MapY = 0; MapY < Columns; MapY++)
 	{
 		for (int MapX = 0; MapX < Rows; MapX++)

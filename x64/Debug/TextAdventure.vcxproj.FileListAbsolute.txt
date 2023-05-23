@@ -1,2 +1,1 @@
 G:\George\Documents\Random projects\TextAdventure\TextAdventure\x64\Debug\TextAdventure.exe
-C:\Users\g.britton\GitHub\TextAdventure\x64\Debug\TextAdventure.exe

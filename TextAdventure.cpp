@@ -1,5 +1,6 @@
 #include "TextAdventure.h"
 #include "Map.h"
+#include "Interface.h"
 
 int main()
 {
@@ -7,7 +8,7 @@ int main()
 	return 0;
 }
 
-// The constructor for the Game class and Room class
+// The constructor for the Game class
 Game::Game()
 {
 	Map NewMap = Map(this);
