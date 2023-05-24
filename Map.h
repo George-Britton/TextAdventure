@@ -38,6 +38,8 @@ public:
 private:
 	// Load the map and populate the GameMap which structs
 	vector<Room> LoadMap(string FilePath);
+	// Sets the appropriate Map line to the generating room
+	bool AddMapLineToRoom(string& Line, int& Index, Room& CurrentRoom, vector<Room>& MapData);
 	// Checks if the map data has reached the end of the Room or file
 	bool CheckRoomCreationEnd(vector<Room>& MapData, Room& InRoom, string InString, int& Index);
 	// Enters data into a Room struct at the appropriate variable

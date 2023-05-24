@@ -8,7 +8,7 @@
         "driver": {
           "name": "PREfast",
           "fullName": "PREfast Code Analysis",
-          "version": "14.35.32215.0",
+          "version": "14.36.32532.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -26,7 +26,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "f11ccf23ae39db97031632825f705d059f35a31b2471a42c49697f6b0729ae99"
+            "sha-256": "0873d603e4f50cf7e1b58cba2d117fc8f35094f917f30af21b32460dbc96dfb8"
           }
         },
         {
@@ -34,7 +34,7 @@
             "uri": "file:///g:/george/documents/random projects/textadventure/textadventure/textadventure.h"
           },
           "hashes": {
-            "sha-256": "8949877bafb0110451241d2d7a5d5ca10f0c43d38a74cb0dbb7a6bc61d6827fb"
+            "sha-256": "012b9010381f6e8913ca03544296f95c919da7d4e534fb2af1e37940c888649d"
           }
         },
         {
@@ -42,7 +42,15 @@
             "uri": "file:///g:/george/documents/random projects/textadventure/textadventure/map.h"
           },
           "hashes": {
-            "sha-256": "60fa2d6fe4b89b0deae78cc05b8868c12d1db5b0aa5ceff54a484de63276c568"
+            "sha-256": "d6ae158551d4e0f0332eb0195d27f7a528e399c9ea80d7cfa88eadac748fe7f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///g:/george/documents/random projects/textadventure/textadventure/interface.h"
+          },
+          "hashes": {
+            "sha-256": "95c1579d6c3364b75b1c51086728921c7808e2df1c260f660869d7fec568a07d"
           }
         }
       ]

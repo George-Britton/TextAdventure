@@ -5,13 +5,21 @@
 int main()
 {
 	Game TextAdv = Game();
+
+	while (!TextAdv.bHasWon)
+	{
+		TextAdv.PlayerInterface->PromptPlayer();
+	}
+
 	return 0;
 }
 
 // The constructor for the Game class
 Game::Game()
 {
-	Map NewMap = Map(this);
+	GameMap = new Map(this);
+	PlayerInterface = new Interface(this);
+
 	cout << "Welcome to " << GameName << "!\n" << GameMap->EnterRoom(StartRoom);
 }
 

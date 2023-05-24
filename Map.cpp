@@ -25,29 +25,32 @@ vector<Room> Map::LoadMap(string FilePath)
 	int Index = 0;
 	while (getline(MapFile, MapLine, ','))
 	{
-		// Remove blankspace characters before file parsing
-		if (bIsWhitespace)
-		{
-			MapLine.erase(0, 3);
-			bIsWhitespace = false;
-		}
-
-		// Check the line for a newline character, and split it if it exists
-		string NewLine = "\n";
-		TextAdv->RemoveSubstrings(MapLine, NewLine);
-		NewRoom = CreateRoom(NewRoom, MapLine, Index);
-		// Check for the end of the Room
-		CheckRoomCreationEnd(MapData, NewRoom, NewLine, Index);
-
-		// Check for the end of the map and return the map vector
-		int Rows = sizeof(GameMap) / sizeof(GameMap[0]);
-		int Columns = sizeof(GameMap[0]) / sizeof(GameMap[0][0]);
-		if (MapData.size() == Rows * Columns)
-			return MapData;
-
+		if (AddMapLineToRoom(MapLine, Index, NewRoom, MapData)) return MapData;
 	}
 	// return the map vector
 	return MapData;
+}
+// Sets the appropriate Map line to the generating room
+bool Map::AddMapLineToRoom(string& Line, int& Index, Room& CurrentRoom, vector<Room>& MapData)
+{
+	// Remove blankspace characters before file parsing
+	if (Index == -1)
+	{
+		Line.erase(0, 3);
+		Index = 0;
+	}
+
+	// Check the line for a newline character, and split it if it exists
+	string NewLine = "\n";
+	TextAdv->RemoveSubstrings(Line, NewLine);
+	CurrentRoom = CreateRoom(CurrentRoom, Line, Index);
+	// Check for the end of the Room
+	CheckRoomCreationEnd(MapData, CurrentRoom, NewLine, Index);
+
+	// Check for the end of the map and return if it's full or not
+	int Rows = size(GameMap);
+	int Columns = size(GameMap[0]);
+	return int(MapData.size()) == Rows * Columns;
 }
 // Checks if the map data has reached the end of the Room or file
 bool Map::CheckRoomCreationEnd(vector<Room>& MapData, Room& InRoom, string InString, int& Index)
@@ -103,8 +106,8 @@ Room Map::CreateRoom(Room& InRoom, string InString, int Index)
 void Map::ParseMap(vector<Room> Map)
 {
 	// First we get the amount of rows and columns there are in our map
-	int Rows = sizeof(GameMap) / sizeof(GameMap[0]);
-	int Columns = sizeof(GameMap[0]) / sizeof(GameMap[0][0]);
+	int Rows = size(GameMap);
+	int Columns = size(GameMap[0]);
 
 	// Then we create the room for the appropriate grid space by looping through the columns and rows
 	for (int MapY = 0; MapY < Columns; MapY++)
@@ -121,8 +124,8 @@ void Map::ParseMap(vector<Room> Map)
 string Map::EnterRoom(int RoomIndex)
 {
 	// Get the row and column of the required room from the size of the arrays
-	int Column = RoomIndex % (sizeof(GameMap[0]) / sizeof(GameMap[0][0]));
-	int Row = (RoomIndex - Column) / (sizeof(GameMap) / sizeof(GameMap[0]));
+	int Column = RoomIndex % size(GameMap[0]);
+	int Row = (RoomIndex - Column) / size(GameMap);
 
 	// Read the appropriate room from the map
 	Room EnteredRoom = GameMap[Row][Column];

@@ -1,5 +1,8 @@
 #pragma once
+#include <iostream>
+#include <vector>
 #include <string>
+using namespace std;
 class Interface;
 class Game;
 
@@ -43,15 +46,15 @@ public:
 	// This functions asks the player for their next move
 	void PromptPlayer();
 	// This string is the player's prompt to act
-	string Prompt = "What would you like to do?\n";
+	string Prompt = "What would you like to do?";
 	// This function interprets the player's input into a command for the game, and returns the console text for the output
 	string ParseInput(string PlayerCommand);
 	// this is the string that is returned if the player passed in an invalid command
 	string InvalidCommand = "That didn't quite make sense, why don't you try again?";
 
 	// INPUTS
-	string Move(string Direction) { return ""; };
-	string Take(string Object) { return ""; };
-	string Open(string Object) { return ""; };
+	string Move(string Direction) { return "Move"; };
+	string Take(string Object) { return "Take"; };
+	string Open(string Object) { return "Open"; };
 };
 

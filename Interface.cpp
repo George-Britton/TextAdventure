@@ -22,9 +22,10 @@ void Interface::PopulateCommandArray()
 void Interface::PromptPlayer()
 {
 	cout << Prompt;
-	string Command;
+	string Command = "";
 	cin >> Command;
 	string Response = ParseInput(Command);
+	cout << Response;
 }
 
 // This function interprets the player's input into a command for the game, and returns the console text for the output
