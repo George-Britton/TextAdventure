@@ -35,6 +35,14 @@ public:
 	// And this is the index of the room we're currently in
 	int CurrentRoom = 4;
 
+	// INPUTS
+	// This function allows the player to move accross the game map, returning the response
+	string Move(string Direction);
+	// This function allows the player to take an item, returning the reaction
+	string Take(string Object);
+	// This function opens or unlocks an obstacle, returning the success/failure
+	string Open(string Object);
+
 private:
 	// Removes a substring from a given string, and returns the before and after
 	void RemoveSubstrings(string& InString, string& Substring);

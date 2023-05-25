@@ -34,6 +34,7 @@ public:
 	Room GameMap[3][3];
 
 	// Finds the appropriate room on the mpa and prints its details
+	Room GetRoom(int RoomIndex);
 	string EnterRoom(int RoomIndex);
 private:
 	// Load the map and populate the GameMap which structs

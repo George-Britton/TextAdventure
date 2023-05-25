@@ -22,7 +22,7 @@ vector<Room> Map::LoadMap(string FilePath)
 	// Loop through the CSV file and populate the map vector (ignoring the initial blankspace), by filling a Room struct and add it onto the end
 	bool bIsWhitespace = true;
 	Room NewRoom = Room();
-	int Index = 0;
+	int Index = -1;
 	while (getline(MapFile, MapLine, ','))
 	{
 		if (AddMapLineToRoom(MapLine, Index, NewRoom, MapData)) return MapData;
@@ -48,8 +48,8 @@ bool Map::AddMapLineToRoom(string& Line, int& Index, Room& CurrentRoom, vector<R
 	CheckRoomCreationEnd(MapData, CurrentRoom, NewLine, Index);
 
 	// Check for the end of the map and return if it's full or not
-	int Rows = size(GameMap);
-	int Columns = size(GameMap[0]);
+	size_t Rows = size(GameMap);
+	size_t Columns = size(GameMap[0]);
 	return int(MapData.size()) == Rows * Columns;
 }
 // Checks if the map data has reached the end of the Room or file
@@ -106,29 +106,32 @@ Room Map::CreateRoom(Room& InRoom, string InString, int Index)
 void Map::ParseMap(vector<Room> Map)
 {
 	// First we get the amount of rows and columns there are in our map
-	int Rows = size(GameMap);
-	int Columns = size(GameMap[0]);
+	size_t Rows = size(GameMap);
+	size_t Columns = size(GameMap[0]);
 
 	// Then we create the room for the appropriate grid space by looping through the columns and rows
-	for (int MapY = 0; MapY < Columns; MapY++)
+	for (size_t MapY = 0; MapY < Columns; MapY++)
 	{
-		for (int MapX = 0; MapX < Rows; MapX++)
+		for (size_t MapX = 0; MapX < Rows; MapX++)
 		{
-			int Index = MapX * Columns + MapY;
+			size_t Index = MapX * Columns + MapY;
 			GameMap[MapX][MapY] = Map.at(Index);
 		}
 	}
 }
 
 // This function returns the name and description of the room, ready to be output to the player
-string Map::EnterRoom(int RoomIndex)
+Room Map::GetRoom(int RoomIndex)
 {
 	// Get the row and column of the required room from the size of the arrays
-	int Column = RoomIndex % size(GameMap[0]);
-	int Row = (RoomIndex - Column) / size(GameMap);
-
+	size_t Column = RoomIndex % size(GameMap[0]);
+	size_t Row = (RoomIndex - Column) / size(GameMap);
+	return GameMap[Row][Column];
+}
+string Map::EnterRoom(int RoomIndex)
+{
 	// Read the appropriate room from the map
-	Room EnteredRoom = GameMap[Row][Column];
+	Room EnteredRoom = GetRoom(RoomIndex);
 	return EnteredRoom.ReadRoom();
 }
 string Room::ReadRoom()

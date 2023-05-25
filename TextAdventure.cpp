@@ -5,12 +5,6 @@
 int main()
 {
 	Game TextAdv = Game();
-
-	while (!TextAdv.bHasWon)
-	{
-		TextAdv.PlayerInterface->PromptPlayer();
-	}
-
 	return 0;
 }
 
@@ -21,6 +15,7 @@ Game::Game()
 	PlayerInterface = new Interface(this);
 
 	cout << "Welcome to " << GameName << "!\n" << GameMap->EnterRoom(StartRoom);
+	while (!bHasWon) PlayerInterface->PromptPlayer();
 }
 
 // Removes a substring from a given string, and returns the before and after
@@ -35,4 +30,48 @@ void Game::RemoveSubstrings(string& InString, string& Substring)
 	string After = InString.substr(InString.find(Substring) + 1);
 	InString = Before;
 	Substring = After;
+}
+
+// This function allows the player to move accross the game map, returning if the movement is valid
+string Game::Move(string Direction)
+{
+	// Parse our direction into an upper case character
+	char DirInitial = islower(Direction.at(0)) ? toupper(Direction.at(0)) : Direction.at(0);
+
+	// Is the direction even valid?
+	string Dirs = "NESW";
+	if (count(Dirs.begin(), Dirs.end(), DirInitial) == 0) return "That doesn't seem like a direction.";
+	// Check the exit is valid for the room
+	string CurrentExits = GameMap->GetRoom(CurrentRoom).Exits;
+	if (count(CurrentExits.begin(), CurrentExits.end(), DirInitial) == 0)
+	{
+		// Return an invalid movement if we haven't moved
+		return "You can't move " + Direction + "\n";
+	}
+
+	// Get the new room's index
+	int DirectionIndex;
+	switch (DirInitial)
+	{
+	case 'N': DirectionIndex = -static_cast<int>(size(GameMap->GameMap[0])); break;
+	case 'E': DirectionIndex = 1; break;
+	case 'S': DirectionIndex = static_cast<int>(size(GameMap->GameMap[0])); break;
+	case 'W': DirectionIndex = -1; break;
+	default: return "That doesn't seem like a direction";
+	}
+
+	// Get the new room's details and return them
+	CurrentRoom += DirectionIndex;
+	return GameMap->EnterRoom(CurrentRoom);
+
+}
+// This function allows the player to take an item, returning whether or not it was taken
+string Game::Take(string Object)
+{
+	return "Take\n";
+}
+// This function opens or unlocks an obstacle, returning the success
+string Game::Open(string Object)
+{
+	return "Open\n";
 }
