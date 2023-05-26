@@ -12,10 +12,11 @@ Interface::Interface(Game* InGame)
 // This function populates the CommandMapping array
 void Interface::PopulateCommandArray()
 {
-	// Here we have three commands: move, take, and open. These three commands each have multiple inputs that will call them
+	// Here we have three commands: move, take, open, and inventory. These commands each have multiple inputs that will call them
 	InputMappings.push_back(CommandMapping(&Game::Move, { "move", "go", "travel" }));
 	InputMappings.push_back(CommandMapping(&Game::Take, { "take", "pickup", "collect" }));
 	InputMappings.push_back(CommandMapping(&Game::Open, { "open", "unlock" }));
+	InputMappings.push_back(CommandMapping(&Game::Inv,  { "inventory", "bag" }));
 }
 
 // This functions asks the player for their next move

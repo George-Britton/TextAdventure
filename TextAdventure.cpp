@@ -1,6 +1,7 @@
 #include "TextAdventure.h"
 #include "Map.h"
 #include "Interface.h"
+#include "Inventory.h"
 
 int main()
 {
@@ -13,6 +14,7 @@ Game::Game()
 {
 	GameMap = new Map(this);
 	PlayerInterface = new Interface(this);
+	PlayerInventory = new Inventory();
 
 	cout << "Welcome to " << GameName << "!\n" << GameMap->EnterRoom(StartRoom);
 	while (!bHasWon) PlayerInterface->PromptPlayer();
@@ -53,8 +55,8 @@ string Game::Move(string Direction)
 	int DirectionIndex;
 	switch (DirInitial)
 	{
-	case 'N': DirectionIndex = -static_cast<int>(size(GameMap->GameMap[0])); break;
-	case 'E': DirectionIndex = 1; break;
+	case 'N': DirectionIndex = -static_cast<int>(size(GameMap->GameMap[0])); break; // North and south are equal to adding or subtracting the number of columns from the current room number
+	case 'E': DirectionIndex = 1; break; // East and west are left and right by one
 	case 'S': DirectionIndex = static_cast<int>(size(GameMap->GameMap[0])); break;
 	case 'W': DirectionIndex = -1; break;
 	default: return "That doesn't seem like a direction";
@@ -74,4 +76,16 @@ string Game::Take(string Object)
 string Game::Open(string Object)
 {
 	return "Open\n";
+}
+// This function reads the player's inventory
+string Game::Inv(string Item)
+{
+	// If nothing was passed in, print the whole inventory
+	if (Item == "") return PlayerInventory->PrintInventory();
+
+	// If the player has the item, acknowledge it
+	if (PlayerInventory->HasItem(Item)) return "You have:\n" + Item + "\n";
+
+	// If the player doesn't have the item, tell them they don't
+	return "It doesn't look like you have that";
 }

@@ -19,7 +19,7 @@ public:
 	// This array of strings is the list of corresponding inputs the player may give to call the function
 	vector<string> Inputs;
 
-	// This function populates the struct with the input variables
+	// This constructor function populates the struct with the input variables
 	CommandMapping(FunctionPtr InFunction, vector<string> InInputs)
 	{
 		Function = InFunction;

@@ -6,7 +6,9 @@
 #include <string>
 #include "Map.h"
 #include "Interface.h"
+#include "Inventory.h"
 using namespace std;
+class Inventory;
 
 // This class is the leading force behind all the logic in the game.
 // It contains the map, game controls and commands, and the file-manipulation
@@ -30,6 +32,9 @@ public:
 	friend class Interface;
 	Interface* PlayerInterface = nullptr;
 
+	// This is a reference to the player's inventory
+	Inventory* PlayerInventory = nullptr;
+
 	// This is the index of the map that we start at
 	int StartRoom = 4;
 	// And this is the index of the room we're currently in
@@ -42,6 +47,8 @@ public:
 	string Take(string Object);
 	// This function opens or unlocks an obstacle, returning the success/failure
 	string Open(string Object);
+	// This function reads the player's inventory for a specific item, or prints the whole thing if no string is passed in
+	string Inv(string Item = "");
 
 private:
 	// Removes a substring from a given string, and returns the before and after
