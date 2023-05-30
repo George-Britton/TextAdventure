@@ -48,7 +48,7 @@ public:
 	// This function opens or unlocks an obstacle, returning the success/failure
 	string Open(string Object);
 	// This function reads the player's inventory for a specific item, or prints the whole thing if no string is passed in
-	string Inv(string Item = "");
+	string Inv(string Item = " ");
 
 private:
 	// Removes a substring from a given string, and returns the before and after

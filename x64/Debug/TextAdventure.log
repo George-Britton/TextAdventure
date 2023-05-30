@@ -1,11 +1,2 @@
-﻿  Interface.cpp
-  Map.cpp
-G:\George\Documents\Random projects\TextAdventure\TextAdventure\Map.cpp(51,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-G:\George\Documents\Random projects\TextAdventure\TextAdventure\Map.cpp(52,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-G:\George\Documents\Random projects\TextAdventure\TextAdventure\Map.cpp(109,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-G:\George\Documents\Random projects\TextAdventure\TextAdventure\Map.cpp(110,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-G:\George\Documents\Random projects\TextAdventure\TextAdventure\Map.cpp(128,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  TextAdventure.cpp
-G:\George\Documents\Random projects\TextAdventure\TextAdventure\TextAdventure.cpp(50,22): warning C4267: '-=': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+﻿  Map.cpp
   TextAdventure.vcxproj -> G:\George\Documents\Random projects\TextAdventure\TextAdventure\x64\Debug\TextAdventure.exe

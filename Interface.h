@@ -46,7 +46,7 @@ public:
 	// This functions asks the player for their next move
 	void PromptPlayer();
 	// This string is the player's prompt to act
-	string Prompt = "What would you like to do?\n";
+	string Prompt = "\nWhat would you like to do?\n";
 	// This function interprets the player's input into a command for the game, and returns the console text for the output
 	string ParseInput(string PlayerCommand);
 	// this is the string that is returned if the player passed in an invalid command

@@ -1,10 +1,12 @@
 #include "Inventory.h"
 
 // The constructor for the Intventory class
-Inventory::Inventory()
+Inventory::Inventory(Game* InGame)
 {
+	// Set the parent reference
+	TextAdv = InGame;
 	// In here we populate the list of items in our game
-	InventoryList.push_back(Item("key", 3, false, false));
+	InventoryList.push_back(Item("key", 3, false, false, "This is room 4"));
 }
 
 // This function collects the item from the room if possible
@@ -18,6 +20,11 @@ bool Inventory::CollectItem(string ItemName, int RoomIndex)
 		{
 			// Collect the item and return a success if it is
 			InvItem.bCollected = true;
+
+			// Get the row and column of the required room from the size of the arrays
+			size_t Column = TextAdv->CurrentRoom % size(TextAdv->GameMap->GameMap[0]);
+			size_t Row = (TextAdv->CurrentRoom - Column) / size(TextAdv->GameMap->GameMap);
+			TextAdv->GameMap->GameMap[Row][Column].Description = InvItem.LatterDescription;
 			return true;
 		}
 	}
@@ -49,14 +56,14 @@ bool Inventory::HasItem(string ItemName)
 	for (Item& InvItem : InventoryList)
 	{
 		// ...exists, and hasn't been consumed
-		if (InvItem.Name == ItemName && !InvItem.bConsumed)
+		if (InvItem.Name == ItemName && InvItem.bCollected && !InvItem.bConsumed)
 		{
 			// Return the acknowledgment that the player has the item
 			return true;
 		}
 	}
 
-	// Otherwise inform teh player that they don't have the item
+	// Otherwise inform the player that they don't have the item
 	return false;
 }
 
@@ -78,6 +85,6 @@ string Inventory::PrintInventory()
 	}
 
 	// Return the final output, but announce it's empty if no items were found
-	if (InventoryEmpty) return "It looks like your inventory is empty";
+	if (InventoryEmpty) return "It looks like your inventory is empty\n";
 	return InventoryString;
 }

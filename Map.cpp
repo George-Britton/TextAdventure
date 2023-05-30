@@ -1,11 +1,13 @@
 #include "Map.h"
-
+#include <string>
+#include <iostream>
 // The constructor for the Map class
 Map::Map(Game* InGame)
 {
 	TextAdv = InGame;
 	ParseMap(LoadMap("Map.csv"));
 	TextAdv->GameMap = this;
+	InitObstacles();
 }
 
 // This function loads the csv file with the mpa details into the game
@@ -137,4 +139,36 @@ string Map::EnterRoom(int RoomIndex)
 string Room::ReadRoom()
 {
 	return RoomName + "\n" + Description + "\n";
+}
+
+// This function initialises the obstacles in the world
+void Map::InitObstacles()
+{
+	Obstacles.push_back(Obstacle("chest", 4, "key", false, "This is Room 5, a chest lays open on the ground, inside a little goblin gives you a thumbs up"));
+}
+// This function notes the obstacle as done, and replaces the world map description
+bool Map::OvercomeObstacle(string ObstacleName)
+{
+	// Loop through the obstacle array
+	for (Obstacle& TestObstacle : Obstacles)
+	{
+		// If we find one with the name, solution and room passed in, and make sure it's not already been resolved...
+		if (TestObstacle.ObstacleName == ObstacleName && TextAdv->PlayerInventory->HasItem(TestObstacle.Solution) && TestObstacle.RoomIndex == TextAdv->CurrentRoom && !TestObstacle.Resolved)
+		{
+			// ... resolve the obstacle and replace the room description
+			TestObstacle.Resolved = true;
+			TextAdv->PlayerInventory->ConsumeItem(TestObstacle.Solution);
+
+			// Get the row and column of the required room from the size of the arrays
+			size_t Column = TextAdv->CurrentRoom % size(GameMap[0]);
+			size_t Row = (TextAdv->CurrentRoom - Column) / size(GameMap);
+			GameMap[Row][Column].Description = TestObstacle.LatterDescription;
+
+			// Check if the player has won the game
+			if (ObstacleName == "chest")
+				TextAdv->bHasWon = true;
+			return true;
+		}
+	}
+	return false;
 }

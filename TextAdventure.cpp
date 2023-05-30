@@ -14,10 +14,14 @@ Game::Game()
 {
 	GameMap = new Map(this);
 	PlayerInterface = new Interface(this);
-	PlayerInventory = new Inventory();
+	PlayerInventory = new Inventory(this);
 
 	cout << "Welcome to " << GameName << "!\n" << GameMap->EnterRoom(StartRoom);
 	while (!bHasWon) PlayerInterface->PromptPlayer();
+	cout << "Congratulations, you won the game!\nPress any button to exit.";
+
+	string goodbye;
+	cin >> goodbye;
 }
 
 // Removes a substring from a given string, and returns the before and after
@@ -70,18 +74,22 @@ string Game::Move(string Direction)
 // This function allows the player to take an item, returning whether or not it was taken
 string Game::Take(string Object)
 {
-	return "Take\n";
+	if (PlayerInventory->CollectItem(Object, CurrentRoom))
+		return "You collected: " + Object + "\n";
+	return "You can't do that\n";
 }
 // This function opens or unlocks an obstacle, returning the success
 string Game::Open(string Object)
 {
-	return "Open\n";
+	if (GameMap->OvercomeObstacle(Object))
+		return "AH-HA!\n";
+	return "No luck there\n";
 }
 // This function reads the player's inventory
 string Game::Inv(string Item)
 {
 	// If nothing was passed in, print the whole inventory
-	if (Item == "") return PlayerInventory->PrintInventory();
+	if (Item == " ") return PlayerInventory->PrintInventory();
 
 	// If the player has the item, acknowledge it
 	if (PlayerInventory->HasItem(Item)) return "You have:\n" + Item + "\n";

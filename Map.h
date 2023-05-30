@@ -3,6 +3,37 @@
 using namespace std;
 class Game;
 
+// This struct holds the details for an obstacle in a room
+struct Obstacle
+{
+public:
+	// This string is the identifier for the obstacle
+	string ObstacleName;
+
+	// This integer is the room it belongs to
+	int RoomIndex;
+
+	// This string holds the name of the item needed to overcome the obstacle
+	string Solution;
+
+	// This boolean checks if the obstacle has been overcome
+	bool Resolved;
+
+	// And this string is the replacement for the room description once the obstacle is overcome
+	string LatterDescription;
+
+	// This constructor function populates the struct with the input variables
+	Obstacle(string InObstacleName, int InRoomIndex, string InSolution, bool InResolved, string InLatterDescription)
+	{
+		ObstacleName = InObstacleName;
+		RoomIndex = InRoomIndex;
+		Solution = InSolution;
+		Resolved = InResolved;
+		LatterDescription = InLatterDescription;
+	}
+
+};
+
 // This struct is used to create a new room in the game.
 // When we load in a .csv file, we create a Room, and populate it with our content
 struct Room
@@ -33,9 +64,15 @@ public:
 	// Feel free to change the sizes of the arrays to change the size of your map. Its co-ordinates are in the [X][Y] format.
 	Room GameMap[3][3];
 
+	// This vector holds all the obstacles for the map
+	vector<Obstacle> Obstacles;
+
 	// Finds the appropriate room on the mpa and prints its details
 	Room GetRoom(int RoomIndex);
 	string EnterRoom(int RoomIndex);
+	
+	// This function notes the obstacle as done, and replaces the world map description
+	bool OvercomeObstacle(string ObstacleName);
 private:
 	// Load the map and populate the GameMap which structs
 	vector<Room> LoadMap(string FilePath);
@@ -47,4 +84,7 @@ private:
 	Room CreateRoom(Room& InRoom, string InString, int Index);
 	// This function reads the map vector and converts it into a 2D array to be traversed by the player
 	void ParseMap(vector<Room> Map);
+	// This function initialises the obstacles in the world
+	void InitObstacles();
+	
 };
