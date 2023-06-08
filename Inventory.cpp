@@ -13,6 +13,7 @@ Inventory::Inventory(Game* InGame)
 bool Inventory::CollectItem(string ItemName, int RoomIndex)
 {
 	// Loop through the inventory array and see if the item...
+	// QUESTION INV1: What is the for loop doing when we use 'Item& InvItem : InventoryList'?
 	for (Item& InvItem : InventoryList)
 	{
 		// ...exists, is in the room, and hasn't already been collected
@@ -22,6 +23,7 @@ bool Inventory::CollectItem(string ItemName, int RoomIndex)
 			InvItem.bCollected = true;
 
 			// Get the row and column of the required room from the size of the arrays
+			// QUESTION INV2: Why is the size() function being divided, should it not return the size of the array?
 			size_t Column = TextAdv->CurrentRoom % size(TextAdv->GameMap->GameMap[0]);
 			size_t Row = (TextAdv->CurrentRoom - Column) / size(TextAdv->GameMap->GameMap);
 			TextAdv->GameMap->GameMap[Row][Column].Description = InvItem.LatterDescription;
@@ -71,7 +73,9 @@ bool Inventory::HasItem(string ItemName)
 string Inventory::PrintInventory()
 {
 	bool InventoryEmpty = true;
-	string InventoryString = "Your inventory contains:\n";;
+
+	// QUESTION INV3: We've made a string here even though we won't use it if the inventory is empty. Why is it here, and what's the trade off/alternative?
+	string InventoryString = "Your inventory contains:\n";
 	// Loop through the inventory array and see if the item...
 	for (Item& InvItem : InventoryList)
 	{

@@ -31,6 +31,7 @@ public:
 	// This is a reference to the interface between the player and the game
 	friend class Interface;
 	Interface* PlayerInterface = nullptr;
+	// QUESTION G1: What does 'friend class' mean?
 
 	// This is a reference to the player's inventory
 	Inventory* PlayerInventory = nullptr;
@@ -53,4 +54,5 @@ public:
 private:
 	// Removes a substring from a given string, and returns the before and after
 	void RemoveSubstrings(string& InString, string& Substring);
+	// QUESTION G2: The '&' used here means we can change the values in-place, but how does that happen?
 };

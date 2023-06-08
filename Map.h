@@ -74,6 +74,7 @@ public:
 	// This function notes the obstacle as done, and replaces the world map description
 	bool OvercomeObstacle(string ObstacleName);
 private:
+	// ROOM AND MAP CREATION
 	// Load the map and populate the GameMap which structs
 	vector<Room> LoadMap(string FilePath);
 	// Sets the appropriate Map line to the generating room

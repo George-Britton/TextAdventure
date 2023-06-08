@@ -12,14 +12,17 @@ int main()
 // The constructor for the Game class
 Game::Game()
 {
+	// Create the managing classes for the game
 	GameMap = new Map(this);
 	PlayerInterface = new Interface(this);
 	PlayerInventory = new Inventory(this);
 
+	// Introduce, prompt, and end the game
 	cout << "Welcome to " << GameName << "!\n" << GameMap->EnterRoom(StartRoom);
 	while (!bHasWon) PlayerInterface->PromptPlayer();
 	cout << "Congratulations, you won the game!\nPress any button to exit.";
 
+	// Let the player end when they're ready
 	string goodbye;
 	cin >> goodbye;
 }
@@ -83,6 +86,8 @@ string Game::Open(string Object)
 {
 	if (GameMap->OvercomeObstacle(Object))
 		return "AH-HA!\n";
+	// QUESTION G3: Can you make the program re-print the room description with the new description when it changes?
+
 	return "No luck there\n";
 }
 // This function reads the player's inventory

@@ -1,2 +1,6 @@
-﻿  Map.cpp
-  TextAdventure.vcxproj -> G:\George\Documents\Random projects\TextAdventure\TextAdventure\x64\Debug\TextAdventure.exe
+﻿  Interface.cpp
+  Inventory.cpp
+  Map.cpp
+  TextAdventure.cpp
+  Generating Code...
+  TextAdventure.vcxproj -> C:\Users\g.britton\GitHub\TextAdventure\x64\Debug\TextAdventure.exe

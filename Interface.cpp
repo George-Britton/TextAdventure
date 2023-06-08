@@ -37,6 +37,8 @@ string Interface::ParseInput(string PlayerCommand)
 {
 	// First we lower case the command...
 	string Input = PlayerCommand;
+
+	// QUESTION INT2: The 'A ? B : C' used here is a specific operator, what is this and what does it do?
 	for (char& CharIndex : Input) CharIndex = islower(CharIndex) ? CharIndex : tolower(CharIndex);
 	
 	// ...and separate the command from the object/direction
@@ -50,6 +52,7 @@ string Interface::ParseInput(string PlayerCommand)
 		if (count(CommandMap.Inputs.begin(), CommandMap.Inputs.end(), Command) > 0)
 		{
 			// If it does, we call it with the object/direction
+			// QUESTION INT3: What is that asterisk doing there?
 			return (TextAdv->*CommandMap.Function)(Object);
 		}
 	}

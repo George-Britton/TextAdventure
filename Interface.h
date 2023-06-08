@@ -11,6 +11,7 @@ struct CommandMapping
 {
 public:
 	// This line creates a keyword to refer to a function pointer. Now we can use 'FunctionPtr' instead of that nasty function pointer declaration
+	// QUESTION INT1: What is a function pointer, and why do we use it here?
 	using FunctionPtr = string(Game::*)(string);
 
 	// This function pointer refers to the function the player will be directed to
