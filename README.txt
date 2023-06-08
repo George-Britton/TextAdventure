@@ -6,3 +6,6 @@ The project files to modify are:
 	Inventory (.h & .cpp)
 	Map.csv
 Feel free to add new classes and files
+
+There are questions throughout the files, see how many you can find answers to.
+Also see if there are any areas you can optimise, and explain why you have.
