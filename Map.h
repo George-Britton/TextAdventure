@@ -41,6 +41,7 @@ struct Room
 public:
 	// Here we store the name, description, and possible exits of the room.
 	string RoomName;
+	// QUESTION M1: There's an issue when we put a comma into the description of the room, it seems to break the parser. Can you find out why and fix it?
 	string Description;
 	// The exits can be stored as initials of the direction (North, East, South, West), and we compare it later to the player input.
 	string Exits;
@@ -67,7 +68,7 @@ public:
 	// This vector holds all the obstacles for the map
 	vector<Obstacle> Obstacles;
 
-	// Finds the appropriate room on the mpa and prints its details
+	// Finds the appropriate room on the map and prints its details
 	Room GetRoom(int RoomIndex);
 	string EnterRoom(int RoomIndex);
 	

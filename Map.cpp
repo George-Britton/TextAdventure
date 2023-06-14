@@ -26,7 +26,7 @@ vector<Room> Map::LoadMap(string FilePath)
 	Room NewRoom = Room();
 	int Index = -1;
 
-	// QUESTION M1: Why are we using a while loop here instead of a do-while?
+	// QUESTION M2: Why are we using a while loop here instead of a do-while?
 	while (getline(MapFile, MapLine, ','))
 	{
 		if (AddMapLineToRoom(MapLine, Index, NewRoom, MapData)) return MapData;
@@ -62,7 +62,7 @@ bool Map::CheckRoomCreationEnd(vector<Room>& MapData, Room& InRoom, string InStr
 	Index++;
 
 	// Is the leftover after removing a substring a substantial string?
-	// QUESTION M2: Why are these two values the checks in this if statement?
+	// QUESTION M3: Why are these two values the checks in this if statement?
 	if (InString != "\n" && InString != "")
 	{
 		// Add the room to the map vector
@@ -147,7 +147,7 @@ string Room::ReadRoom()
 // This function initialises the obstacles in the world
 void Map::InitObstacles()
 {
-	// QUESTION M3: The obstacles are recreated in-line here. Can you think of a way to load them from a seprate file?
+	// QUESTION M4: The obstacles are recreated in-line here. Can you think of a way to load them from a seprate file?
 	Obstacles.push_back(Obstacle("chest", 4, "key", false, "This is Room 5, a chest lays open on the ground, inside a little goblin gives you a thumbs up"));
 }
 // This function notes the obstacle as done, and replaces the world map description
